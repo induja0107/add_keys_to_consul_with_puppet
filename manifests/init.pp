@@ -26,15 +26,14 @@
 #
 # Copyright 2016 Induja Vijayaragavan, unless otherwise noted.
 #
-class add_keys_to_consul_with_puppet(String $vm_name_path) {
-  
+class add_keys_to_consul_with_puppet(String $vm_name_path='vm_name') {
 
   #path_to_key = join(['application/',$facts['deploy_path']])
   #$vm_name_path = join([$path_to_key,'/vm_name'])
 
   exec { 'curl_put_vm_name':
-    command => "curl -X PUT -d ${::hostname} http://${profile::tomcat::params::master}:8500/v1/kv/${vm_name_path} && touch ${profile::tomcat::params::cdadmin_path}/myfile",
-    creates => "${profile::tomcat::params::cdadmin_path}/myfile",
+    command => "curl -X PUT -d ${::hostname} http://${params::master}:8500/v1/kv/${vm_name_path} && touch ${params::cdadmin_path}/myfile",
+    creates => "${params::cdadmin_path}/myfile",
     path    => '/usr/bin/:/bin/:/usr/local/bin/',
   } 
 }

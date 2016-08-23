@@ -1,0 +1,2 @@
+fixtures:
+  add_keys_to_consul_with_puppet: "#{source_dir}"
